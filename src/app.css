@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	* {
+		color: #ffffff;
+	}
+  h1, h2, h3, h4 {
+    @apply font-bold;
+  }
+	body {
+		@apply bg-zinc-800 h-screen min-h-min flex flex-col;
+	}
+	main {
+		@apply flex grow;
+	}
+	footer, header {
+		@apply shrink;
+	}
+}
+
