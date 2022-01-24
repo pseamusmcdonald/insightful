@@ -5,7 +5,6 @@
 
 	if ($session != null) {
 		$user = JSON.parse($session).user
-		console.log($user)
 	}
 
 	$: segment = $page.url.pathname.split('/')[1]

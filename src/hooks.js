@@ -2,7 +2,7 @@ import cookie from 'cookie'
 
 export const handle = async ({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
-	request.locals.session = cookies.session || null;
+	request.locals.session = JSON.parse(cookies.session) || null;
 
 	const response = await resolve(request);
 
@@ -14,7 +14,7 @@ export const handle = async ({ request, resolve }) => {
 			status: 302,
 		}
 		return redirect
-	} else if (request.locals.session !== null && !request.url.pathname.includes("/app")) {
+	} else if (request.locals.session !== null && request.url.pathname.includes("/auth")) {
 		const redirect = {
 			headers: {
 				Location: '/app',
