@@ -2,7 +2,8 @@ import cookie from 'cookie'
 
 export const handle = async ({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
-	request.locals.session = JSON.parse(cookies.session) || null;
+	
+	request.locals.session = cookies.session ? JSON.parse(cookies.session) : null;
 
 	const response = await resolve(request);
 

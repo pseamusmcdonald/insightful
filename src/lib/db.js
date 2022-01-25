@@ -23,7 +23,7 @@ export default {
 			return body
 		},
 		update: async () => {
-
+			
 		},
 	},
 	auth: {

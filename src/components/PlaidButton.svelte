@@ -33,4 +33,5 @@
 
 <button
 	on:click={handler.open()}
+	class="py-2 px-4 bg-zinc-100 hover:bg-zinc-200 text-black rounded font-semibold"
 >Link Account</button>

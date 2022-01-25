@@ -17,7 +17,6 @@ export const post = async (req) => {
 	const newa = await db.plaid_items.set(new_item)
 		.catch(err => error = err)
 
-		console.log(new_item)
 	return {
 		status: !error ? 200 : 500
 	}
