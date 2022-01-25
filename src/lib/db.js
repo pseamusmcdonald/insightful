@@ -45,6 +45,9 @@ export default {
 			const { error } = await supabase.auth.signUp({
 				email: email,
 				password: password,
+			},
+			{
+				redirectTo: 'https://insightful-rho.vercel.app/login',
 			})
 			if (error) {
 				console.log(error)

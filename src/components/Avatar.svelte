@@ -1,8 +1,9 @@
 <script>
 	export let url
+	export let size = 150
 </script>
 
-<div style="height: 150px; width: 150px;" class="overflow-hidden rounded-full">
+<div style={`height: ${size}px; width: ${size}px;`} class="overflow-hidden rounded-full">
 	{#if url}
 		<img
 			src={url}

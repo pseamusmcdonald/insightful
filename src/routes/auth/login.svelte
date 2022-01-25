@@ -25,7 +25,7 @@
 			<input
 				type="email"
 				bind:value={email}
-				class="px-4 py-2 rounded"
+				class="px-4 py-2 rounded text-zinc-900"
 			/>
 		</div>
 		<div class="flex flex-col gap-1">
@@ -33,7 +33,7 @@
 			<input
 				type="password"
 				bind:value={password}
-				class="px-4 py-2 rounded"
+				class="px-4 py-2 rounded text-zinc-900"
 			/>
 		</div>
 	</div>
