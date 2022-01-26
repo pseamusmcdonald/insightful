@@ -1,4 +1,6 @@
 import supabase from "./supabase"
+import { get } from 'svelte/store'
+import { user } from '$stores/user'
 
 export default {
 	accounts: {
@@ -13,6 +15,14 @@ export default {
 				.eq('id', id)
 				.single()
 			console.log(error)
+			return body
+		},
+		async getUserAccounts () {
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('user_id', user_id)
+			console.log(error, user_id)
 			return body
 		},
 		async set (item) {
@@ -47,7 +57,7 @@ export default {
 				password: password,
 			},
 			{
-				redirectTo: 'https://insightful-rho.vercel.app/login',
+				redirectTo: 'https://insightful-rho.vercel.app/auth/login',
 			})
 			if (error) {
 				console.log(error)
@@ -67,6 +77,14 @@ export default {
 				.select('*')
 				.eq('id', id)
 				.single()
+			console.log(error)
+			return body
+		},
+		async getUserPlaidLogins () {
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('user_id', get(user).id)
 			console.log(error)
 			return body
 		},

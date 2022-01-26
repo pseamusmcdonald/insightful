@@ -3,8 +3,8 @@
 </script>
 
 <div class="flex flex-col w-2/3 m-auto">
-	<div class="flex flex-col mb-8">
-		<h1 class='py-3 mb-6 text-2xl font-normal border-b border-zinc-500'>Settings</h1>
+	<div class="flex flex-col mb-6">
+		<h1 class='py-3 mb-5 text-2xl font-normal border-b border-zinc-500'>Settings</h1>
 		<ul class="flex gap-8">
 			<li><a
 				href='/app/profile'
