@@ -25,10 +25,10 @@ export default {
 			console.log(error, user_id)
 			return body
 		},
-		async set (item) {
+		async set (account) {
 			const { body, error } = await supabase
 				.from(this.table)
-				.insert(item)
+				.insert(account)
 			console.log(error)
 			return body
 		},

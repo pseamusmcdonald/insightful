@@ -1,4 +1,4 @@
-import { getAccessToken } from '$lib/plaid/index'
+import { exchangePublicToken } from '$lib/plaid/index'
 import db from '$lib/db'
 
 export const post = async (req) => {
@@ -6,17 +6,34 @@ export const post = async (req) => {
 
 	let error
 
-	const plaid_access_token = await getAccessToken(params.public_token)
+	const { access_token, item_id } = await exchangePublicToken(params.public_token)
 		.catch(err => error = err)
 
 	const new_item = {
-		id: plaid_access_token,
+		id: item_id,
+		institution_name: params.metadata.institution.name,
+		access_token: access_token,
 		user_id: req.locals.session.user.id,
 	}
 
-	const newa = await db.plaid_items.set(new_item)
+	await db.plaid_items.set(new_item)
 		.catch(err => error = err)
 
+	const accountPromises = []
+
+	for (const account of params.metadata.accounts) {
+		accountPromises.push(db.accounts.set({
+			id: account.id,
+			name: account.name,
+			access_token: access_token,
+			user_id: req.locals.session.user.id,
+			mask: account.mask,
+		}))
+	}
+
+	await Promise.all(accountPromises)
+		.catch(err => error = err)
+	 
 	return {
 		status: !error ? 200 : 500
 	}

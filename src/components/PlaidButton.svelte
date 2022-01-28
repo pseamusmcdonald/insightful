@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte'
-	import { user } from '$stores/user'
+	import { getContext } from 'svelte'
 
+	const page_data = getContext('page_data')
 	let handler
 
 	onMount(async () => {
@@ -9,13 +10,15 @@
 		const { link_token } = await res.json()
 		handler = Plaid.create({
 			token: link_token,
-			onSuccess: (public_token, metadata) => {
-				fetch('/app/api/plaid/create-item', {
+			onSuccess: async (public_token, metadata) => {
+				await fetch('/app/api/plaid/create-item', {
 					method: 'POST',
 					body: JSON.stringify({
 						public_token: public_token,
+						metadata: metadata,
 					})
 				})
+				$page_data.items.updating = true
 			},
 			onLoad: () => {
 

@@ -1,25 +1,23 @@
 <script>
 	import PlaidButton from '$components/PlaidButton.svelte'
-	import db from '$lib/db'
-	import { onMount } from 'svelte'
+	import { getContext } from 'svelte'
 
-	let accounts = []
-
-	onMount(async () => {
-		accounts = await db.plaid_items.getUserPlaidLogins()
-	})
+	const page_data = getContext('page_data')
 </script>
 
 <div>
-	<div class='flex justify-between border-b border-zinc-500 py-2'>
+	<div class='flex justify-between border-b border-zinc-500 py-1'>
 		<h2 class='text-lg'>Linked Accounts</h2>
 		<div>Securely link your brokerage accounts with Plaid</div>
 	</div>
 	<div class='flex flex-col divide-y divide-zinc-500'>
-		{#each accounts as account}
-			<p>{account}</p>
+		{#each $page_data.plaid_items.data as item}
+			<div class='py-8 flex justify-between'>
+				<div>{item.institution_name}</div>
+				<button class='text-red-400 font-medium'>Remove</button>
+			</div>
 		{/each}
-		<div class='flex justify-center py-10 border-b border-zinc-500'>
+		<div class='flex justify-center py-8 border-b border-zinc-500'>
 			<PlaidButton />
 		</div>
 	</div>

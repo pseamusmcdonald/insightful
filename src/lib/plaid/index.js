@@ -47,9 +47,9 @@ export const createLinkToken = async (user_id) => {
 
 // Exchange a Link public_token for an API access_token
 
-export const getAccessToken = async (token) => {
+export const exchangePublicToken = async (token) => {
 	const accessTokenResponse = await client.itemPublicTokenExchange({
 		public_token: token,
 	})
-	return accessTokenResponse.data.access_token
+	return accessTokenResponse.data
 }

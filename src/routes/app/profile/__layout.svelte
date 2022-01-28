@@ -1,5 +1,35 @@
 <script>
 	import { page } from '$app/stores'
+	import { setContext, onMount } from 'svelte'
+	import { writable } from 'svelte/store'
+	import db from '$lib/db'
+
+	const page_data = writable({
+		plaid_items: {
+			data: [],
+			updating: false,
+		},
+	})
+	
+	setContext('page_data', page_data)
+
+	onMount(async () => {
+		$page_data.plaid_items.data = await db.plaid_items.getUserPlaidLogins()
+	})
+
+	$: {
+		for (let i = 0; i < Object.keys($page_data).length; i++) {
+			if ($page_data[Object.keys($page_data)[i]].updating) {
+				const update = async () => {
+					$page_data[Object.keys($page_data)[i]].data = await db.plaid_items.getUserPlaidLogins()
+					$page_data[Object.keys($page_data)[i]].updating = false
+				}
+				update()
+			}
+		}
+	}
+
+	
 </script>
 
 <div class="flex flex-col w-2/3 m-auto">
