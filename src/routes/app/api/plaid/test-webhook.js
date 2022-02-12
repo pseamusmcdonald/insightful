@@ -1,16 +1,18 @@
 import { client } from '$lib/plaid'
 
 
-export const post = async (req) => {
+export async function post (req) {
 	let error
 
 	const request = {
-		access_token: 'access-sandbox-69844067-992c-4cac-b3d2-11a683d6925b',
+		access_token: 'access-sandbox-ae38132e-d3c5-4641-8ad7-62007dc9b3bf',
 		webhook_code: 'DEFAULT_UPDATE'
 	}
-	const res = await client.sandboxItemFireWebhook(request)
-	console.log(res)
-	
+	await client.sandboxItemFireWebhook(request)
+	.catch(err => {
+		console.error(err)
+	})
+
 	return {
 		status: !error ? 200 : 500
 	}
