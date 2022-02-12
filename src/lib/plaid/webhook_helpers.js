@@ -1,12 +1,13 @@
 import db from '$lib/db'
 import { client } from '$lib/plaid'
 
-export const testWebhook = () => {
+export const testWebhook = async () => {
 	const request = {
 		access_token: 'access-sandbox-69844067-992c-4cac-b3d2-11a683d6925b',
 		webhook_code: 'DEFAULT_UPDATE'
 	}
-	return client.sandboxItemFireWebhook(request)
+	await client.sandboxItemFireWebhook(request)
+	return
 }
 
 export const handleItemError = async (item_id) => {
