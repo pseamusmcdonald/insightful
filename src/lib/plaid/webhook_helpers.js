@@ -13,7 +13,7 @@ export const handleItemError = async (item_id, user_id) => {
 	// link from notification to accounts, add update option
 }
 
-export const handleRevokedItem = (item_id, user_id) => {
+export const handleRevokedItem = async (item_id, user_id) => {
 	// update item status
 	await db.plaid_items.updateStatus(item_id, 'invalid')
 	const item_data = db.plaid_items.get(item_id)
@@ -23,7 +23,7 @@ export const handleRevokedItem = (item_id, user_id) => {
 	})
 }
 
-export const handlePendingItemExp = (item_id, user_id) => {
+export const handlePendingItemExp = async (item_id, user_id) => {
 	// update item status
 	await db.plaid_items.updateStatus(item_id, 'invalid')
 	const item_data = db.plaid_items.get(item_id)

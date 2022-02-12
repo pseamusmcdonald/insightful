@@ -1,12 +1,12 @@
 import { handleItemWebhook, handleHoldingsWebhook, unhandledWebhook } from '$lib/plaid/webhook_handlers'
 
 export const post = async (req) => {
-	console.log(req)
-
+	// would be ideal to verify Plaid as sender
 	const body = Object.fromEntries(req.body.entries())
 
-	if (body.webhookType.toLowerCase() === 'holdings') handleHoldingsWebhook(body, req.locals.session.user.id)
-	else if (body.webhookType.toLowerCase() === 'item') handleItemWebhook(body, req.locals.session.user.id)
-	else unhandledWebhook(body)
+	if (body.webhook_type.toLowerCase() === 'holdings') await handleHoldingsWebhook(body, req.locals.session.user.id)
+	else if (body.webhook_type.toLowerCase() === 'item') await handleItemWebhook(body, req.locals.session.user.id)
+	else console.log('failed')
+	
 	return
 }
