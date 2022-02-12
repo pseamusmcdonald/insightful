@@ -4,6 +4,8 @@ export const post = async (req) => {
 	// would be ideal to verify Plaid as sender
 	const body = Object.fromEntries(req.body.entries())
 
+	console.log(body)
+
 	if (body.webhook_type.toLowerCase() === 'holdings') await handleHoldingsWebhook(body)
 	else if (body.webhook_type.toLowerCase() === 'item') await handleItemWebhook(body)
 	else console.log('failed')

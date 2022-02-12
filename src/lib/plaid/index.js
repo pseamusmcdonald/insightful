@@ -24,7 +24,7 @@ const configuration = new Configuration({
   },
 })
 
-const client = new PlaidApi(configuration)
+export const client = new PlaidApi(configuration)
 
 
 // Create a link token with configs which we can then use to initialize Plaid Link client-side.
@@ -38,6 +38,7 @@ export const createLinkToken = async (user_id) => {
 		products: PLAID_PRODUCTS,
 		country_codes: PLAID_COUNTRY_CODES,
 		language: 'en',
+		webhook: 'https://insightful-rho.vercel.app/webhooks/plaid',
 	}
 	const linkTokenResponse = await client.linkTokenCreate(configs)
 	return linkTokenResponse.data
