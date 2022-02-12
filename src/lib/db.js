@@ -25,6 +25,14 @@ export default {
 			console.log(error, user_id)
 			return body
 		},
+		async getItemAccounts () {
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('plaid_id', user_id)
+			console.log(error, user_id)
+			return body
+		},
 		async set (account) {
 			const { body, error } = await supabase
 				.from(this.table)
@@ -37,7 +45,7 @@ export default {
 		},
 	},
 	auth: {
-		login: async (email, password) => {
+		async login (email, password) {
 			const { session, user, error } = await supabase.auth.signIn({
 				email: email,
 				password: password,
@@ -51,7 +59,7 @@ export default {
 			document.cookie = `session=${JSON.stringify(session)}; path=/; max-age=5400; secure;`
 			return session.user
 		},
-		signUp: async (email, password) => {
+		async signUp (email, password) {
 			const { error } = await supabase.auth.signUp({
 				email: email,
 				password: password,
@@ -95,16 +103,19 @@ export default {
 			console.log(error)
 			return body
 		},
-		async update (id) {
-
+		async updateStatus (id, status) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.update({status: status})
+				.match({id: id})
 		},
 	},
-	users: {
-		table: 'users',
-		delete: async () => {
+	notifications: {
+		table: 'notifications',
+		async delete () {
 
 		},
-		get: async (id) => {
+		async get (id) {
 			const { body, error } = await supabase
 				.from(this.table)
 				.select('*')
@@ -113,7 +124,32 @@ export default {
 			console.log(error)
 			return body
 		},
-		update: async () => {
+		async set (notification) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.insert(notification)
+			console.log(error)
+			return body
+		},
+		async update () {
+
+		},
+	},
+	users: {
+		table: 'users',
+		async delete () {
+
+		},
+		async get (id) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('id', id)
+				.single()
+			console.log(error)
+			return body
+		},
+		async update () {
 
 		},
 	},

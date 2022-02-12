@@ -1,11 +1,16 @@
 import db from '$lib/db'
+import { handleItemError, handlePendingItemExp, handleRevokedItem } from './webhook_helpers'
 
-export const handleItemWebhook = async (reqBody) => {
-	
+export const handleItemWebhook = async (reqBody, user_id) => {
+	if (reqBody.webhookCode === 'ERROR') handleItemError(reqBody.item_id, user_id)
+	else if (reqBody.webhookCode === 'PENDING_EXPIRATION') handlePendingItemExp(reqBody.item_id, user_id)
+	else if (reqBody.webhookCode === 'USER_PERMISSION_REVOKED') handleRevokedItem(reqBody.item_id, user_id)
+	else unhandledWebhook(reqBody)
 }
 
 export const handleHoldingsWebhook = async (reqBody) => {
-
+	if (reqBody.webhookCode === 'DEFAULT_UPDATE') handleUpdatedHoldings(reqBody.item_id)
+	else unhandledWebhook(reqBody)
 }
 
 export const unhandledWebhook = (reqBody) => {

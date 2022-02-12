@@ -14,6 +14,7 @@ export const post = async (req) => {
 		institution_name: params.metadata.institution.name,
 		access_token: access_token,
 		user_id: req.locals.session.user.id,
+		status: 'valid',
 	}
 
 	await db.plaid_items.set(new_item)
