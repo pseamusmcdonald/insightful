@@ -74,6 +74,31 @@ export default {
 			return error
 		},
 	},
+	notifications: {
+		table: 'notifications',
+		async delete () {
+
+		},
+		async get (id) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('id', id)
+				.single()
+			console.log(error)
+			return body
+		},
+		async set (notification) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.insert(notification)
+			console.log(error)
+			return body
+		},
+		async update () {
+
+		},
+	},
 	plaid_items: {
 		table: 'plaid_items',
 		async delete (id) {
@@ -108,11 +133,12 @@ export default {
 				.from(this.table)
 				.update({status: status})
 				.match({id: id})
+			return body[0]
 		},
 	},
-	notifications: {
-		table: 'notifications',
-		async delete () {
+	positions: {
+		table: 'positions',
+		async delete (id) {
 
 		},
 		async get (id) {
@@ -124,15 +150,12 @@ export default {
 			console.log(error)
 			return body
 		},
-		async set (notification) {
+		async set (item) {
 			const { body, error } = await supabase
 				.from(this.table)
-				.insert(notification)
+				.insert(item)
 			console.log(error)
 			return body
-		},
-		async update () {
-
 		},
 	},
 	users: {

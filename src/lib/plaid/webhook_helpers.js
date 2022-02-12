@@ -1,12 +1,10 @@
 import db from '$lib/db'
 
 export const handleItemError = async (item_id, user_id) => {
-	// update item status
-	await db.plaid_items.updateStatus(item_id, 'invalid')
-	const item_data = db.plaid_items.get(item_id)
+	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
 	await db.notifications.set({
 		user_id: user_id,
-		message: `Your account with ${item_data.insitution_name} has been updated. Please re-authorize this account here.`
+		message: `Your account with ${body.institution_name} has been updated. Please re-authorize this account here.`
 	})
 	
 	// **NEED TO DO - frontend**
@@ -14,21 +12,21 @@ export const handleItemError = async (item_id, user_id) => {
 }
 
 export const handleRevokedItem = async (item_id, user_id) => {
-	// update item status
-	await db.plaid_items.updateStatus(item_id, 'invalid')
-	const item_data = db.plaid_items.get(item_id)
+	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
 	await db.notifications.set({
 		user_id: user_id,
-		message: `Your account with ${item_data.insitution_name} has been revoked. Please re-authorize this account here.`
+		message: `Your account with ${body.institution_name} has been revoked. Please re-authorize this account here.`
 	})
 }
 
 export const handlePendingItemExp = async (item_id, user_id) => {
-	// update item status
-	await db.plaid_items.updateStatus(item_id, 'invalid')
-	const item_data = db.plaid_items.get(item_id)
+	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
 	await db.notifications.set({
 		user_id: user_id,
-		message: `Your account with ${item_data.insitution_name} has been revoked. Please re-authorize this account here.`
+		message: `Your account with ${body.institution_name} has been revoked. Please re-authorize this account here.`
 	})
+}
+
+export const handleUpdatedHoldings = (req_body, user_id) => {
+	
 }

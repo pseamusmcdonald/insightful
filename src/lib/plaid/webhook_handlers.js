@@ -1,5 +1,4 @@
-import db from '$lib/db'
-import { handleItemError, handlePendingItemExp, handleRevokedItem } from './webhook_helpers'
+import { handleItemError, handlePendingItemExp, handleRevokedItem, handleUpdatedHoldings } from './webhook_helpers'
 
 export const handleItemWebhook = async (reqBody, user_id) => {
 	if (reqBody.webhook_code === 'ERROR') handleItemError(reqBody.item_id, user_id)
@@ -8,8 +7,8 @@ export const handleItemWebhook = async (reqBody, user_id) => {
 	else unhandledWebhook(reqBody)
 }
 
-export const handleHoldingsWebhook = async (reqBody) => {
-	if (reqBody.webhook_code === 'DEFAULT_UPDATE') handleUpdatedHoldings(reqBody.item_id)
+export const handleHoldingsWebhook = async (reqBody, user_id) => {
+	if (reqBody.webhook_code === 'DEFAULT_UPDATE') handleUpdatedHoldings(reqBody, user_id)
 	else unhandledWebhook(reqBody)
 }
 
