@@ -1,7 +1,4 @@
 import db from '$lib/db'
-import { client } from '$lib/plaid'
-
-
 
 export const handleItemError = async (item_id) => {
 	const body = await db.plaid_items.updateStatus(item_id, 'invalid')

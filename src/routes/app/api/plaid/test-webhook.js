@@ -1,6 +1,5 @@
 import { client } from '$lib/plaid'
 
-
 export async function post (req) {
 	let error
 

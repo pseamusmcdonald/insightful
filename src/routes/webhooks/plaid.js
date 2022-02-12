@@ -2,13 +2,9 @@ import { handleItemWebhook, handleHoldingsWebhook, unhandledWebhook } from '$lib
 
 export const post = async (req) => {
 
-	console.log(req)
-	// would be ideal to verify Plaid as sender
-	//const body = Object.fromEntries(req.body.entries())
+	if (req.body.webhook_type.toLowerCase() === 'holdings') await handleHoldingsWebhook(req.body)
+	else if (req.body.webhook_type.toLowerCase() === 'item') await handleItemWebhook(req.body)
+	else unhandledWebhook(req.body)
 
-	//if (body.webhook_type.toLowerCase() === 'holdings') await handleHoldingsWebhook(body)
-	//else if (body.webhook_type.toLowerCase() === 'item') await handleItemWebhook(body)
-	//else console.log('failed')
-	
 	return
 }
