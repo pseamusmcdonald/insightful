@@ -1,4 +1,4 @@
-import { createLinkToken } from '$lib/plaid/index'
+import { createLinkToken } from '$lib/plaid/helpers'
 
 export const get = async (req) => {
 	let error
