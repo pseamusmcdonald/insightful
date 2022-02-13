@@ -38,10 +38,8 @@ export const exchangePublicToken = async (token) => {
 export const getAccountPositions = async (access_token) => {
 	const response = await client.investmentsHoldingsGet({access_token: access_token})
   const { holdings, securities } = response.data
-	console.log(response.data)
 	const map = new Map()
 	securities.forEach(security => map.set(security.security_id, security))
 	const merged = holdings.map(holding => ({...map.get(holding.security_id), ...holding}))
-	console.log(merged)
 	return merged
 }

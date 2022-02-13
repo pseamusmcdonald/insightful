@@ -1,4 +1,5 @@
 import db from '$lib/db'
+import { getAccountPositions } from './helpers'
 
 const handleItemError = async (item_id) => {
 	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
@@ -27,8 +28,26 @@ const handlePendingItemExp = async (item_id) => {
 	})
 }
 
-const handleUpdatedHoldings = (req_body) => {
-	
+const handleUpdatedHoldings = async (item_id) => {
+	const item = await db.plaid_items.get(item_id)
+
+	const positions = await getAccountPositions(item.access_token)
+	const positionPromises = []
+	for (const position of positions) {
+		positionPromises.push(db.positions.upsert({
+			security_id: position.security_id,
+			account_id: position.account_id,
+			cost_basis: position.cost_basis,
+			quantity: position.quantity,
+			ticker: position.ticker_symbol,
+			cusip: position.cusip,
+			isin: position.isin,
+		}))
+	}
+	await Promise.all(positionPromises)
+		.catch(err => error = err)
+
+	return
 }
 
 export const handleItemWebhook = async (reqBody) => {
@@ -39,7 +58,7 @@ export const handleItemWebhook = async (reqBody) => {
 }
 
 export const handleHoldingsWebhook = async (reqBody) => {
-	if (reqBody.webhook_code === 'DEFAULT_UPDATE') handleUpdatedHoldings(reqBody)
+	if (reqBody.webhook_code === 'DEFAULT_UPDATE') handleUpdatedHoldings(reqBody.item_id)
 	else unhandledWebhook(reqBody)
 }
 

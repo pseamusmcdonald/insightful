@@ -150,10 +150,17 @@ export default {
 			console.log(error)
 			return body
 		},
-		async set (item) {
+		async set (position) {
 			const { body, error } = await supabase
 				.from(this.table)
-				.insert(item)
+				.insert(position)
+			console.log(error)
+			return body
+		},
+		async upsert (position) {
+			const { body, error } = await supabase
+				.from(this.table)
+				.upsert(position)
 			console.log(error)
 			return body
 		},

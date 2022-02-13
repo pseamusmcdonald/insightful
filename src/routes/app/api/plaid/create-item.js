@@ -40,6 +40,7 @@ export const post = async (req) => {
 	const positions = await getAccountPositions(access_token)
 	for (const position of positions) {
 		positionPromises.push(db.positions.set({
+			security_id: position.security_id,
 			account_id: position.account_id,
 			cost_basis: position.cost_basis,
 			quantity: position.quantity,
