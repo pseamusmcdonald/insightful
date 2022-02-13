@@ -2,9 +2,14 @@
 	import { page } from '$app/stores'
 	import { setContext, onMount } from 'svelte'
 	import { writable } from 'svelte/store'
+	import { user } from '$stores/user'
 	import db from '$lib/db'
 
 	const page_data = writable({
+		plaid_items: {
+			data: [],
+			updating: false,
+		},
 		plaid_items: {
 			data: [],
 			updating: false,
@@ -14,6 +19,7 @@
 	setContext('page_data', page_data)
 
 	onMount(async () => {
+		console.log($user)
 		$page_data.plaid_items.data = await db.plaid_items.getUserPlaidLogins()
 	})
 

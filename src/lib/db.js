@@ -54,8 +54,6 @@ export default {
 				console.log(error)
 				return
 			}
-			const { body } = await supabase.from('users').select('*').eq('id', user.id)
-			session.user = {...user, ...body[0]}
 			document.cookie = `session=${JSON.stringify(session)}; path=/; max-age=5400; secure;`
 			return session.user
 		},
