@@ -1,5 +1,12 @@
 <script>
-	
+	import { beforeUpdate } from 'svelte'
+
+	export let selected_account
+	let highlighted_positions = []
+
+	beforeUpdate(() => {
+		highlighted_positions = db.positions.getHighlightedPositions(selected_account)
+	})
 </script>
 
 <div>
@@ -11,4 +18,15 @@
 			</svg>
 		</button>
 	</div>
+	<div class='flex justify-between border-b border-zinc-500 py-2  text-xs'>
+		<div>Company Name</div>
+		<div>Price</div>
+		<div>Quantity</div>
+		<div>Current Value</div>
+		<div>% of Portfolio</div>
+		<div>P/L</div>
+	</div>
+	{#each highlighted_positions as highlighted_position}
+
+	{/each}
 </div>

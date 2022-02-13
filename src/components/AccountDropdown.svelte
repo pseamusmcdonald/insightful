@@ -1,12 +1,12 @@
 <script>
 	import { clickOutside } from '$lib/helpers'
 
-	export let selectedAccount
+	export let selected_account
 	let accounts = [{mark: 1234, institution_name: 'Merrill Lynch', id: 1213}]
 	let isOpen = false
 
 	const handleSelection = (account) => {
-		selectedAccount = account
+		selected_account = account
 		isOpen = !isOpen
 		console.log(isOpen)
 	}

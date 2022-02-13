@@ -10,8 +10,12 @@
 			data: [],
 			updating: false,
 		},
-		plaid_items: {
-			data: [],
+		notifications: {
+			data: {},
+			updating: false,
+		},
+		preferences: {
+			data: {},
 			updating: false,
 		},
 	})
