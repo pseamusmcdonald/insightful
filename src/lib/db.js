@@ -21,8 +21,8 @@ export default {
 			const { body, error } = await supabase
 				.from(this.table)
 				.select('*')
-				.eq('user_id', user_id)
-			console.log(error, user_id)
+				.eq('user_id', get(user).id)
+			console.log(error)
 			return body
 		},
 		async getItemAccounts () {
@@ -33,10 +33,10 @@ export default {
 			console.log(error, user_id)
 			return body
 		},
-		async set (account) {
+		async set (accounts) {
 			const { body, error } = await supabase
 				.from(this.table)
-				.insert(account)
+				.insert(accounts)
 			console.log(error)
 			return body
 		},
@@ -148,17 +148,27 @@ export default {
 			console.log(error)
 			return body
 		},
-		async set (position) {
+		async set (positions) {
 			const { body, error } = await supabase
 				.from(this.table)
-				.insert(position)
+				.insert(positions)
 			console.log(error)
-			return body
+			return { body, error: err }
 		},
 		async upsert (position) {
 			const { body, error } = await supabase
 				.from(this.table)
 				.upsert(position)
+			console.log(error)
+			return body
+		},
+		async getHighlightedPositions(selected_account) {
+			console.log(selected_account)
+			const { body, error } = await supabase
+				.from(this.table)
+				.select('*')
+				.eq('account_id', selected_account.id)
+				.eq('highlighted', true)
 			console.log(error)
 			return body
 		},

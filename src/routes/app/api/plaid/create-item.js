@@ -20,9 +20,8 @@ export const post = async (req) => {
 	await db.plaid_items.set(new_item)
 		.catch(err => error = err)
 
-	const accountPromises = []
-	for (const account of params.metadata.accounts) {
-		accountPromises.push(db.accounts.set({
+	const mappedAccounts = params.metadata.accounts.map((account) => {
+		return {
 			id: account.id,
 			name: account.name,
 			type: account.type,
@@ -30,16 +29,17 @@ export const post = async (req) => {
 			access_token: access_token,
 			user_id: req.locals.session.user.id,
 			mask: account.mask,
-		}))
-	}
+		}
+	})
 	
-	await Promise.all(accountPromises)
+	await db.accounts.set(mappedAccounts)
 		.catch(err => error = err)
 
-	const positionPromises = []
 	const positions = await getAccountPositions(access_token)
-	for (const position of positions) {
-		positionPromises.push(db.positions.set({
+	
+	const mappedPositions = positions.map((position) => {
+		return {
+			name: position.name,
 			security_id: position.security_id,
 			account_id: position.account_id,
 			cost_basis: position.cost_basis,
@@ -47,9 +47,10 @@ export const post = async (req) => {
 			ticker: position.ticker_symbol,
 			cusip: position.cusip,
 			isin: position.isin,
-		}))
-	}
-	await Promise.all(positionPromises)
+		}
+	})
+	
+	await db.positions.set(mappedPositions)
 		.catch(err => error = err)
 
 	return {

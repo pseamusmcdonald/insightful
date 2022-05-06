@@ -1,12 +1,17 @@
 <script>
-	import { beforeUpdate } from 'svelte'
+	import db from '$lib/db'
 
 	export let selected_account
+
 	let highlighted_positions = []
 
-	beforeUpdate(() => {
-		highlighted_positions = db.positions.getHighlightedPositions(selected_account)
-	})
+	$: updatePositions(selected_account)
+
+	const updatePositions = async (account) => {
+		if (account) {
+			highlighted_positions = await db.positions.getHighlightedPositions(selected_account)
+		}
+	}
 </script>
 
 <div>
@@ -18,15 +23,67 @@
 			</svg>
 		</button>
 	</div>
-	<div class='flex justify-between border-b border-zinc-500 py-2  text-xs'>
-		<div>Company Name</div>
-		<div>Price</div>
-		<div>Quantity</div>
-		<div>Current Value</div>
-		<div>% of Portfolio</div>
-		<div>P/L</div>
-	</div>
-	{#each highlighted_positions as highlighted_position}
-
-	{/each}
+	<table>
+		<thead class='border-b border-zinc-500'>
+			<td class='text-xs py-2'>
+				Company Name
+			</td>
+			<td class='text-xs py-2'>
+				Price
+			</td>
+			<td class='text-xs'>
+				Quantity
+			</td>
+			<td class='text-xs'>
+				Current Value
+			</td>
+			<td class='text-xs'>
+				% of Portfolio
+			</td>
+			<td class='text-xs'>
+				P/L
+			</td>
+		</thead>
+		<tbody>
+			{#each highlighted_positions as highlighted_position}
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>
+
+<style>
+	table {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+	}
+	table thead {
+		/* head takes the height it requires, 
+		and it's not scaled when table is resized */
+		flex: 0 0 auto;
+		width: calc(100% - 0.9em);
+	}
+	table tbody {
+		/* body takes all the remaining available space */
+		flex: 1 1 auto;
+		display: block;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	tbody {
+		width: 100%;
+	}
+	table thead, table tbody tr {
+		display: table;
+		table-layout: fixed;
+	}
+</style>
