@@ -1,33 +1,23 @@
 <script>
 	import '../app.css'
-	import { onMount, tick, afterUpdate } from 'svelte'
+	import { onMount, tick, afterUpdate, beforeUpdate } from 'svelte'
 	import { user } from '$stores/user'
 	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import db from '$lib/db'
 
-	let resolvePromise = null
-	const promise = new Promise(resolve => resolvePromise = resolve)
-
-
-	afterUpdate(async () => {
-		if ($session != null && $user == null) {
-			$user = JSON.parse($session).user
-			$user.data = await db.users.get($user.id)
-			resolvePromise()
-		} else resolvePromise()
-	})
+	if ($session != null && $user == null) {
+		$user = JSON.parse($session).user
+	}
 
 	$: segment = $page.url.pathname.split('/')[1]
 </script>
 
 
 {#if segment == 'app'}
-	{#await promise then loaded}
-		<main>
-			<slot />
-		</main>
-	{/await}
+	<main>
+		<slot />
+	</main>
 {:else}
 	<header class='py-8 px-12'>
 		<div class='flex justify-between items-center'>
