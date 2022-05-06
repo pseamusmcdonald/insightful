@@ -10,12 +10,12 @@
 	const promise = new Promise(resolve => resolvePromise = resolve)
 
 
-	onMount(async () => {
-		if ($session != null) {
+	afterUpdate(async () => {
+		if ($session != null && $user == null) {
 			$user = JSON.parse($session).user
 			$user.data = await db.users.get($user.id)
 			resolvePromise()
-		}
+		} else resolvePromise()
 	})
 
 	$: segment = $page.url.pathname.split('/')[1]
