@@ -1,25 +1,29 @@
 <script>
 	import '../app.css'
-	import { onMount } from 'svelte'
+	import { onMount, tick, afterUpdate } from 'svelte'
 	import { user } from '$stores/user'
 	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import db from '$lib/db'
 
-	if ($session != null) {
-		$user = JSON.parse($session).user
-	}
+	let resolvePromise = null
+	const promise = new Promise(resolve => resolvePromise = resolve)
 
-	const user_data = db.users.get($user.id)
-		.then(data => $user.data = data)
 
-	console.log($user)
+	onMount(async () => {
+		if ($session != null) {
+			$user = JSON.parse($session).user
+			$user.data = await db.users.get($user.id)
+			resolvePromise()
+		}
+	})
 
 	$: segment = $page.url.pathname.split('/')[1]
 </script>
 
+
 {#if segment == 'app'}
-	{#await user_data then load}
+	{#await promise then loaded}
 		<main>
 			<slot />
 		</main>

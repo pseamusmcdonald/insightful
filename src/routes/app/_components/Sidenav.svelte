@@ -3,7 +3,7 @@
 	import { user } from '$stores/user'
 	import Avatar from '$components/Avatar.svelte'
 
-	console.log($user)
+	console.log($user.data)
 </script>
 
 <div class="w-1/5 h-full flex flex-col border-r border-zinc-500">
