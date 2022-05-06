@@ -8,9 +8,7 @@
 	$: updatePositions(selected_account)
 
 	const updatePositions = async (account) => {
-		if (account) {
-			highlighted_positions = await db.positions.getHighlightedPositions(selected_account)
-		}
+		highlighted_positions = await db.positions.getHighlightedPositions(selected_account)
 	}
 </script>
 
@@ -44,15 +42,19 @@
 				P/L
 			</td>
 		</thead>
-		<tbody>
-			{#each highlighted_positions as highlighted_position}
-				<tr>
+		<tbody class='text-sm'>
+			{#each highlighted_positions as position}
+				<tr class='mt-2'>
+					<td>{position.name}</td>
+					<td>{position}</td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
-					<td></td>
+				</tr>
+				<tr class='!flex justify-between mt-8 pb-2 border-b border-zinc-500'>
+					<td colspan="3">Explore recent news</td>
+					<td colspan="3"><div class='flex gap-4'><span>Sheets</span>|<span>Charts</span></div></td>
 				</tr>
 			{/each}
 		</tbody>
@@ -70,13 +72,13 @@
 		/* head takes the height it requires, 
 		and it's not scaled when table is resized */
 		flex: 0 0 auto;
-		width: calc(100% - 0.9em);
+		width: calc(100%);
 	}
 	table tbody {
 		/* body takes all the remaining available space */
 		flex: 1 1 auto;
 		display: block;
-		overflow-y: scroll;
+		overflow-y: auto;
 		overflow-x: hidden;
 	}
 	tbody {

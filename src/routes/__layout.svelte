@@ -1,20 +1,29 @@
 <script>
 	import '../app.css'
-	import { user } from '../stores/user'
+	import { onMount } from 'svelte'
+	import { user } from '$stores/user'
 	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
+	import db from '$lib/db'
 
 	if ($session != null) {
 		$user = JSON.parse($session).user
 	}
 
+	const user_data = db.users.get($user.id)
+		.then(data => $user.data = data)
+
+	console.log($user)
+
 	$: segment = $page.url.pathname.split('/')[1]
 </script>
 
 {#if segment == 'app'}
-	<main>
-		<slot />
-	</main>
+	{#await user_data then load}
+		<main>
+			<slot />
+		</main>
+	{/await}
 {:else}
 	<header class='py-8 px-12'>
 		<div class='flex justify-between items-center'>

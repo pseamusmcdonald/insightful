@@ -1,8 +1,7 @@
 <script>
 	import { getContext } from 'svelte'
 	import Avatar from '$components/Avatar.svelte'
-
-	const user = getContext('user')
+	import { user } from '$stores/user'
 </script>
 
 <div class='flex flex-col gap-3'>

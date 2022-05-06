@@ -2,6 +2,8 @@
 	import { page } from '$app/stores'
 	import { user } from '$stores/user'
 	import Avatar from '$components/Avatar.svelte'
+
+	console.log($user)
 </script>
 
 <div class="w-1/5 h-full flex flex-col border-r border-zinc-500">
@@ -60,7 +62,7 @@
 		</ul>
 	</div>
 	<div class="flex flex-col items-center shrink px-1.5 mb-4 gap-4">
-		<Avatar url={$user.photo_url}/>
+		<Avatar url={$user.data.photo_url}/>
 		<a
 			href='/app/profile'
 			class='block w-full px-2 py-4 text-center'

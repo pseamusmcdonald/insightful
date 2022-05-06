@@ -20,7 +20,7 @@ export default {
 		async getUserAccounts () {
 			const { body, error } = await supabase
 				.from(this.table)
-				.select('*')
+				.select('*, positions(*)')
 				.eq('user_id', get(user).id)
 			console.log(error)
 			return body
@@ -164,12 +164,14 @@ export default {
 		},
 		async getHighlightedPositions(selected_account) {
 			console.log(selected_account)
-			const { body, error } = await supabase
+			let query = supabase
 				.from(this.table)
-				.select('*')
-				.eq('account_id', selected_account.id)
-				.eq('highlighted', true)
-			console.log(error)
+				.select('*, account:accounts(*)')
+			if (selected_account) query = query.eq('account_id', selected_account.id)
+			else query = query.neq('account.user_id', get(user).id)
+			query = query.eq('highlighted', true)
+			const { body, error } = await query
+			console.log(error, body)
 			return body
 		},
 	},
