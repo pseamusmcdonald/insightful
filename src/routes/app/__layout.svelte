@@ -1,14 +1,14 @@
 <script>
 	import { onMount } from 'svelte'
 	import { user } from '$stores/user'
-	import db from '$lib/db'
+	import { Users } from '$lib/db'
 	import Sidenav from './_components/Sidenav.svelte'
 
 	let resolvePromise = null
 	const promise = new Promise(resolve => resolvePromise = resolve)
 
 	onMount(async () => {
-		$user.data = await db.users.get($user.id)
+		$user.data = await Users.get($user.id)
 		resolvePromise()
 		console.log($user.data)
 	})

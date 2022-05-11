@@ -25,8 +25,8 @@
 		<ul class="flex flex-col gap-1 px-1.5">
 			<li>
 				<a
-					href='/app/'
-					class='flex w-full pl-4 py-4 gap-3'
+					href='/app'
+					class='flex w-full pl-4 py-4 gap-3 rounded hover:bg-zinc-700'
 					class:selected={$page.url.pathname === ('/app')}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -38,7 +38,7 @@
 			<li>
 				<a
 					href='/app/sheets'
-					class='flex w-full pl-4 py-4 gap-3'
+					class='flex w-full pl-4 py-4 gap-3 rounded hover:bg-zinc-700 transition-all'
 					class:selected={$page.url.pathname.includes('/app/sheets')}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -50,7 +50,7 @@
 			<li>
 				<a
 					href='/app/charts'
-					class='flex w-full pl-4 py-4 gap-3'
+					class='flex w-full pl-4 py-4 gap-3 rounded hover:bg-zinc-700'
 					class:selected={$page.url.pathname.includes('/app/charts')}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -65,7 +65,7 @@
 		<Avatar url={$user.data.photo_url}/>
 		<a
 			href='/app/profile'
-			class='block w-full px-2 py-4 text-center'
+			class='block w-full px-2 py-4 text-center rounded hover:bg-zinc-700'
 			class:selected={$page.url.pathname.includes('/app/profile')}
 		>My Profile</a>
 	</div>
@@ -73,6 +73,6 @@
 
 <style>
 	.selected {
-		@apply bg-zinc-700 rounded;
+		@apply bg-zinc-600;
 	}
 </style>

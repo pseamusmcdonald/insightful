@@ -2,13 +2,13 @@
 	import { goto } from '$app/navigation'
 	import { user } from '../../stores/user'
 
-	import db from '$lib/db'
+	import { Auth } from '$lib/db'
 
 	let email
 	let password
 
 	const handleLogin = async () => {
-		await db.auth.login(email, password)
+		await Auth.login(email, password)
 			.then(res => $user = res)
 			.catch(err => alert(err))
 		goto('/app')

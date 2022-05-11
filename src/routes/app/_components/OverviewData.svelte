@@ -11,8 +11,8 @@
 			</svg>
 		</button>
 	</div>
-	<div class='flex gap-5 py-4'>
-		<div class='flex flex-col gap-2 w-1/3'>
+	<div class='flex py-4 divide-x'>
+		<div class='metricBlock flex flex-col gap-2 w-1/3'>
 			<div class='flex justify-between text-sm font-bold'>
 				<div>Net Liquidity</div>
 				<div>$255,xxx</div>
@@ -26,7 +26,7 @@
 				<div>$105,xxx</div>
 			</div>
 		</div>
-		<div class='flex flex-col gap-2 w-1/3'>
+		<div class='metricBlock flex flex-col gap-2 w-1/3'>
 			<div class='flex justify-between text-sm'>
 				<div>Net Liquidity</div>
 				<div>$255,xxx</div>
@@ -40,7 +40,7 @@
 				<div>$255,xxx</div>
 			</div>
 		</div>
-		<div class='flex flex-col gap-2 w-1/3'>
+		<div class='metricBlock flex flex-col gap-2 w-1/3'>
 			<div class='flex justify-between text-sm'>
 				<div>Net Liquidity</div>
 				<div>$255,xxx</div>
@@ -56,3 +56,17 @@
 		</div>
 	</div>
 </div>
+
+
+<style>
+	.metricBlock {
+		padding: 0 2rem;
+	}
+	.metricBlock:first-of-type {
+		padding-left: 0;
+	}
+
+	.metricBlock:last-of-type {
+		padding-right: 0;
+	}
+</style>

@@ -19,6 +19,11 @@ export const createLinkToken = async (user_id) => {
 		country_codes: PLAID_COUNTRY_CODES,
 		language: 'en',
 		webhook: 'https://insightful-rho.vercel.app/webhooks/plaid',
+		account_filters: {
+			investment: {
+				account_subtypes: ['all'],
+			},
+		}
 	}
 	const linkTokenResponse = await client.linkTokenCreate(configs)
 	return linkTokenResponse.data

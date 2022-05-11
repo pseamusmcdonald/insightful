@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation'
-	import db from '$lib/db'
+	import { Auth } from '$lib/db'
 
 	let email
 	let password
@@ -8,7 +8,7 @@
 
 	const handleSignUp = async () => {
 		if (password == passConf) {
-			const error = await db.auth.signUp(email, password)
+			const error = await Auth.signUp(email, password)
 			if (!error) goto('./sign-up/success')
 		}
 		else alert('Passwords don\'t match')

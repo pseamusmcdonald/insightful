@@ -1,10 +1,8 @@
 <script>
 	import '../app.css'
-	import { onMount, tick, afterUpdate, beforeUpdate } from 'svelte'
 	import { user } from '$stores/user'
 	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
-	import db from '$lib/db'
 
 	if ($session != null && $user == null) {
 		$user = JSON.parse($session).user

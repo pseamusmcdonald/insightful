@@ -1,13 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+	@font-face {
+		font-family: 'Basier';
+		font-weight: normal;
+		src: url('../static/fonts/basier-normal.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'Basier';
+		font-weight: medium;
+		src: url('../static/fonts/basier-medium.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'Basier';
+		font-weight: bold;
+		src: url('../static/fonts/basier-bold.woff2') format('woff2');
+	}
 	* {
+		font-family: 'DM Sans', sans-serif;
 		color: #ffffff;
 	}
   h1, h2, h3, h4 {
-    @apply font-bold;
+    @apply font-bold tracking-wide;
   }
 	#svelte {
 		@apply bg-zinc-800 max-h-screen h-screen min-h-min flex flex-col overflow-clip;
@@ -17,6 +35,18 @@
 	}
 	footer, header {
 		@apply shrink;
+	}
+	
+	*::-webkit-scrollbar {
+		width: 12px;
+	}
+	
+	*::-webkit-scrollbar-track {
+		@apply rounded bg-inherit;
+	}
+	
+	*::-webkit-scrollbar-thumb {
+		@apply rounded bg-zinc-600;
 	}
 }
 

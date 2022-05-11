@@ -1,5 +1,5 @@
 <script>
-	import db from '$lib/db'
+	import { Positions } from '$lib/db'
 
 	export let selected_account
 
@@ -8,7 +8,7 @@
 	$: updatePositions(selected_account)
 
 	const updatePositions = async (account) => {
-		highlighted_positions = await db.positions.getHighlightedPositions(selected_account)
+		highlighted_positions = await Positions.getHighlightedPositions(selected_account)
 	}
 </script>
 
@@ -52,7 +52,7 @@
 					<td></td>
 					<td></td>
 				</tr>
-				<tr class='!flex justify-between mt-8 pb-2 border-b border-zinc-500'>
+				<tr class='!flex justify-between mt-10 pb-2 border-b border-zinc-500'>
 					<td colspan="3">Explore recent news</td>
 					<td colspan="3"><div class='flex gap-4'><span>Sheets</span>|<span>Charts</span></div></td>
 				</tr>

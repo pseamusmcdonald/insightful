@@ -5,6 +5,8 @@ export const handle = async ({ request, resolve }) => {
 	
 	request.locals.session = cookies.session ? JSON.parse(cookies.session) : null;
 
+	console.log(request.locals.session, 2)
+
 	const response = await resolve(request);
 
 	if (request.locals.session === null && request.url.pathname.includes("/app")) {
@@ -15,7 +17,7 @@ export const handle = async ({ request, resolve }) => {
 			status: 302,
 		}
 		return redirect
-	} else if (request.locals.session !== null && request.url.pathname.includes("/auth")) {
+	} else if (request.locals.session !== null && !request.url.pathname.includes("/app")) {
 		const redirect = {
 			headers: {
 				Location: '/app',
@@ -24,6 +26,7 @@ export const handle = async ({ request, resolve }) => {
 		}
 		return redirect
 	} else {
+		console.log(request.url.pathname)
 		return response
 	}
 }
