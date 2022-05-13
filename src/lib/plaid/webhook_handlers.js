@@ -1,9 +1,9 @@
-import db from '$lib/db'
+import { Notifications, Plaid_Items, Positions } from '$lib/db'
 import { getAccountPositions } from './helpers'
 
 const handleItemError = async (item_id) => {
-	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
-	await db.notifications.set({
+	const body = await Plaid_Items.updateStatus(item_id, 'invalid')
+	await Notifications.set({
 		user_id: body.user_id,
 		message: `Your account with ${body.institution_name} has been updated. Please re-authorize this account here.`
 	})
@@ -13,39 +13,38 @@ const handleItemError = async (item_id) => {
 }
 
 const handleRevokedItem = async (item_id) => {
-	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
-	await db.notifications.set({
+	const body = await Plaid_Items.updateStatus(item_id, 'invalid')
+	await Notifications.set({
 		user_id: body.user_id,
-		message: `Your account with ${body.institution_name} has been revoked. Please re-authorize this account here.`
+		message: `Your account authorization with ${body.institution_name} has been revoked. Please re-connect this account here.`
 	})
 }
 
 const handlePendingItemExp = async (item_id) => {
-	const body = await db.plaid_items.updateStatus(item_id, 'invalid')
-	await db.notifications.set({
+	const body = await Plaid_Items.updateStatus(item_id, 'invalid')
+	await Notifications.set({
 		user_id: body.user_id,
-		message: `Your account with ${body.institution_name} has been revoked. Please re-authorize this account here.`
+		message: `Your account authorization with ${body.institution_name} has been revoked. Please re-authorize this account here.`
 	})
 }
 
 const handleUpdatedHoldings = async (item_id) => {
-	const item = await db.plaid_items.get(item_id)
+	const item = await Plaid_Items.get(item_id)
 
 	const positions = await getAccountPositions(item.access_token)
-	const positionPromises = []
-	for (const position of positions) {
-		positionPromises.push(db.positions.upsert({
+	const mappedPositions = positions.map(position => {
+		return {
 			security_id: position.security_id,
+			name: position.name,
 			account_id: position.account_id,
 			cost_basis: position.cost_basis,
 			quantity: position.quantity,
 			ticker: position.ticker_symbol,
 			cusip: position.cusip,
 			isin: position.isin,
-		}))
-	}
-	await Promise.all(positionPromises)
-		.catch(err => error = err)
+		}
+	})
+	await Positions.upsert(mappedPositions)
 
 	return
 }

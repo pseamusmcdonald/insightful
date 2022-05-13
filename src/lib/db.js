@@ -158,10 +158,10 @@ export const Positions = {
 		console.log(error)
 		return { body, error: err }
 	},
-	async upsert (position) {
+	async upsert (positions) {
 		const { body, error } = await supabase
 			.from(this.table)
-			.upsert(position)
+			.upsert(positions)
 		console.log(error)
 		return body
 	},

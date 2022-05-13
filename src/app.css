@@ -6,11 +6,11 @@
 
 :root {
   --light-background: rgb(250 250 250);
-  --dark-background: rgb(39 39 42);
+  --dark-background: rgb(24 24 27);
 	--dark-search-background: rgb(82 82 91);
 	--dark-text: rgb(250 250 250);
 	--light-text: rgb(39 39 42);
-	--dark-menu: rgb(63 63 70);
+	--dark-menu: rgb(39 39 42);
 	--light-menu: rgb(250 250 250);
 	--dark-selected: rgb(82 82 91);
 	--light-selected: rgb(161 161 170);
@@ -37,7 +37,7 @@ html.light {
 
 @layer base {
 	. {
-		background: @apply text-zinc-700;
+		background: @apply text-zinc-900;
 	}
 	@font-face {
 		font-family: 'Basier';

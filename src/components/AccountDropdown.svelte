@@ -41,7 +41,7 @@
 			<li>
 				<button
 					on:click={() => handleSelection(null)}
-					class='text-left w-full text-sm min-w-max px-4 py-3 hover:bg-zinc-100'
+					class='text-left w-full text-sm min-w-max px-4 py-3 hover:bg-custom-hover'
 					class:selected={selected_account == null}
 				>All Acounts</button>
 			</li>
@@ -49,7 +49,7 @@
 				<li>
 					<button
 						on:click={handleSelection(account)}
-						class='w-full text-left text-sm min-w-max px-4 py-3 hover:bg-zinc-100'
+						class='w-full text-left text-sm min-w-max px-4 py-3 hover:bg-custom-hover'
 						class:selected={selected_account == account}
 					>{account.name} ******{account.mask}</button>
 				</li>
@@ -60,7 +60,7 @@
 
 <style>
 	.selected {
-		@apply bg-zinc-200;
+		@apply bg-custom-selected;
 	}
 
 	.icon {
