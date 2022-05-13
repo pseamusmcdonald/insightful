@@ -4,7 +4,41 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --light-background: rgb(250 250 250);
+  --dark-background: rgb(39 39 42);
+	--dark-search-background: rgb(82 82 91);
+	--dark-text: rgb(250 250 250);
+	--light-text: rgb(39 39 42);
+	--dark-menu: rgb(63 63 70);
+	--light-menu: rgb(250 250 250);
+	--dark-selected: rgb(82 82 91);
+	--light-selected: rgb(161 161 170);
+	--dark-hover: rgb(63 63 70);
+	--light-hover: rgb(212 212 216);
+}
+
+html {
+  --background: var(--dark-background);
+	--search-background: var(--dark-search-background);
+	--text: var(--dark-text);
+	--menu: var(--dark-menu);
+	--selected: var(--dark-selected);
+	--hover: var(--dark-hover);
+}
+
+html.light {
+  --background: var(--light-background);
+	--text: var(--light-text);
+	--menu: var(--light-menu);
+	--selected: var(--light-selected);
+	--hover: var(--light-hover);
+}
+
 @layer base {
+	. {
+		background: @apply text-zinc-700;
+	}
 	@font-face {
 		font-family: 'Basier';
 		font-weight: normal;
@@ -22,13 +56,13 @@
 	}
 	* {
 		font-family: 'DM Sans', sans-serif;
-		color: #ffffff;
+		@apply text-custom-text;
 	}
   h1, h2, h3, h4 {
     @apply font-bold tracking-wide;
   }
 	#svelte {
-		@apply bg-zinc-800 max-h-screen h-screen min-h-min flex flex-col overflow-clip;
+		@apply bg-custom-background max-h-screen h-screen min-h-min flex flex-col overflow-clip;
 	}
 	main {
 		@apply flex grow max-h-full;
@@ -42,11 +76,11 @@
 	}
 	
 	*::-webkit-scrollbar-track {
-		@apply rounded bg-inherit;
+		@apply bg-inherit;
 	}
 	
 	*::-webkit-scrollbar-thumb {
-		@apply rounded bg-zinc-600;
+		@apply rounded-xl bg-zinc-500;
 	}
 }
 

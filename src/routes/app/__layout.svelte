@@ -5,12 +5,12 @@
 	import Sidenav from './_components/Sidenav.svelte'
 
 	let resolvePromise = null
+	
 	const promise = new Promise(resolve => resolvePromise = resolve)
 
 	onMount(async () => {
 		$user.data = await Users.get($user.id)
 		resolvePromise()
-		console.log($user.data)
 	})
 </script>
 

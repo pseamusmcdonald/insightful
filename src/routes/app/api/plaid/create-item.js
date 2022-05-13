@@ -1,5 +1,5 @@
 import { exchangePublicToken, getAccountPositions } from '$lib/plaid/helpers'
-import db from '$lib/db'
+import { Accounts, Plaid_Items, Positions } from '$lib/db'
 
 export const post = async (req) => {
 	const params = JSON.parse(req.body)
@@ -17,7 +17,7 @@ export const post = async (req) => {
 		status: 'valid',
 	}
 
-	await db.plaid_items.set(new_item)
+	await Plaid_Items.set(new_item)
 		.catch(err => error = err)
 
 	const mappedAccounts = params.metadata.accounts.map((account) => {
@@ -32,7 +32,7 @@ export const post = async (req) => {
 		}
 	})
 	
-	await db.accounts.set(mappedAccounts)
+	await Accounts.set(mappedAccounts)
 		.catch(err => error = err)
 
 	const positions = await getAccountPositions(access_token)
@@ -50,7 +50,7 @@ export const post = async (req) => {
 		}
 	})
 	
-	await db.positions.set(mappedPositions)
+	await Positions.set(mappedPositions)
 		.catch(err => error = err)
 
 	return {

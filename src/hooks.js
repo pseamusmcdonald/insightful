@@ -5,8 +5,6 @@ export const handle = async ({ request, resolve }) => {
 	
 	request.locals.session = cookies.session ? JSON.parse(cookies.session) : null;
 
-	console.log(request.locals.session, 2)
-
 	const response = await resolve(request);
 
 	if (request.locals.session === null && request.url.pathname.includes("/app")) {
@@ -26,7 +24,6 @@ export const handle = async ({ request, resolve }) => {
 		}
 		return redirect
 	} else {
-		console.log(request.url.pathname)
 		return response
 	}
 }

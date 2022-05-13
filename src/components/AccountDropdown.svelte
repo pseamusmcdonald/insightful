@@ -35,23 +35,21 @@
 	</button>
 	{#if isOpen}
 		<div 
-			class='mt-2 bg-white rounded-md absolute z-30 divide-y max-h-56 overflow-y-auto'
+			class='mt-2 bg-custom-menu rounded shadow-md absolute z-30 divide-y max-h-56 overflow-y-auto'
 			transition:fade={{duration: 150}}
 		>
-			<li
-				class='text-sm text-zinc-900 min-w-max px-4 py-3'
-				class:selected={selected_account == null}
-			>
+			<li>
 				<button
 					on:click={() => handleSelection(null)}
-					class='text-left w-full'
+					class='text-left w-full text-sm min-w-max px-4 py-3 hover:bg-zinc-100'
+					class:selected={selected_account == null}
 				>All Acounts</button>
 			</li>
 			{#each accounts as account}
 				<li>
 					<button
 						on:click={handleSelection(account)}
-						class='w-full text-left text-sm text-zinc-900 min-w-max px-4 py-3'
+						class='w-full text-left text-sm min-w-max px-4 py-3 hover:bg-zinc-100'
 						class:selected={selected_account == account}
 					>{account.name} ******{account.mask}</button>
 				</li>

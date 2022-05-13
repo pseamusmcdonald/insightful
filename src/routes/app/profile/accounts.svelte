@@ -11,7 +11,7 @@
 		<div>Securely link your brokerage accounts with Plaid</div>
 	</div>
 	<div class='flex flex-col divide-y divide-zinc-500'>
-		{#each $page_data.plaid_items.data as item}
+		{#each $page_data.Plaid_Items.data as item}
 			<div class='py-8 flex justify-between'>
 				<div>{item.institution_name}</div>
 				<button class='text-red-400 font-medium'>Remove</button>

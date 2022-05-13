@@ -3,6 +3,7 @@
 	import { getContext } from 'svelte'
 
 	const page_data = getContext('page_data')
+
 	let handler
 
 	onMount(async () => {
@@ -18,7 +19,7 @@
 						metadata: metadata,
 					})
 				})
-				$page_data.items.updating = true
+				$page_data.Plaid_Items.updating = true
 			},
 			onLoad: () => {
 

@@ -18,8 +18,11 @@
 	$: updatePageData($page_data.updating)
 	
 	const updatePageData = async () => {
-		await Accounts.getAccountsData()
-			.then(data => $page_data = {...$page_data, ...data})
+		if ($page_data.updating) {
+			await Accounts.getUserAccounts()
+				.then(data => $page_data = {...$page_data, ...data})
+			$page_data.updating = false
+		}
 	}
 </script>
 

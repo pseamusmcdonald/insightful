@@ -1,11 +1,22 @@
 <script>
 	import '../app.css'
 	import { user } from '$stores/user'
+	import { theme } from '$stores/theme'
 	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
 
 	if ($session != null && $user == null) {
 		$user = JSON.parse($session).user
+	}
+
+	$: setThemeMode($theme)
+
+	const setThemeMode = () => {
+		console.log($theme)
+		if (typeof window !== 'undefined') {
+			document.querySelector('html').removeAttribute('class')
+			document.querySelector('html').classList.add($theme)
+		}	
 	}
 
 	$: segment = $page.url.pathname.split('/')[1]

@@ -179,6 +179,10 @@ export const Positions = {
 	},
 };
 
+export const Preferences = {
+
+}
+
 export const Users = {
 	table: 'users',
 	async delete () {

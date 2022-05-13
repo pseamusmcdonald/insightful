@@ -3,18 +3,18 @@
 	import { setContext, onMount } from 'svelte'
 	import { writable } from 'svelte/store'
 	import { user } from '$stores/user'
-	import { Plaid_Items } from '$lib/db'
+	import { Notifications, Plaid_Items, Preferences } from '$lib/db'
 
 	const page_data = writable({
-		plaid_items: {
+		Plaid_Items: {
 			data: [],
 			updating: false,
 		},
-		notifications: {
+		Notifications: {
 			data: {},
 			updating: false,
 		},
-		preferences: {
+		Preferences: {
 			data: {},
 			updating: false,
 		},
@@ -24,21 +24,24 @@
 
 	onMount(async () => {
 		console.log($user)
-		$page_data.plaid_items.data = await Plaid_Items.getUserPlaidLogins()
+		$page_data.Plaid_Items.data = await Plaid_Items.getUserPlaidLogins()
 	})
 
 	$: {
 		for (let i = 0; i < Object.keys($page_data).length; i++) {
 			if ($page_data[Object.keys($page_data)[i]].updating) {
-				const update = async () => {
-					$page_data[Object.keys($page_data)[i]].data = await db.plaid_items.getUserPlaidLogins()
-					$page_data[Object.keys($page_data)[i]].updating = false
-				}
-				update()
+				update(Object.keys($page_data)[i])
 			}
 		}
 	}
 
+	const update = async (key) => {
+		if (key === 'Notifications') $page_data[key].data = null
+		else if (key === 'Plaid_Items') $page_data[key].data = Plaid_Items.getUserPlaidLogins()
+		else if (key === 'Preferences') $page_data[key].data = null
+		$page_data[key].updating = false
+	}
+		
 	
 </script>
 

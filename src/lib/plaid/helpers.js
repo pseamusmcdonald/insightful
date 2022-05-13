@@ -1,6 +1,6 @@
 import client from './index'
 
-const PLAID_PRODUCTS = ('transactions').split(
+const PLAID_PRODUCTS = ('investments').split(
   ',',
 )
 const PLAID_COUNTRY_CODES = ('US').split(

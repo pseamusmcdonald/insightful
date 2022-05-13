@@ -1,5 +1,6 @@
 <script>
 	import { Positions } from '$lib/db'
+import Search from '$components/Search.svelte'
 
 	export let selected_account
 
@@ -12,7 +13,7 @@
 	}
 </script>
 
-<div>
+<div class='max-h-screen'>
 	<div class='flex justify-between border-b border-zinc-500 py-2'>
 		<div>Highlighted Positions</div>
 		<button>
@@ -57,6 +58,10 @@
 					<td colspan="3"><div class='flex gap-4'><span>Sheets</span>|<span>Charts</span></div></td>
 				</tr>
 			{/each}
+			<tr class='!flex justify-between items-center my-6 border-zinc-500'>
+				<td colspan="3">Add a position to highlight</td>
+				<td colspan="3"><Search /></td>
+			</tr>
 		</tbody>
 	</table>
 </div>
