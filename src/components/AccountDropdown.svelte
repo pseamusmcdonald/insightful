@@ -35,7 +35,7 @@
 	</button>
 	{#if isOpen}
 		<div 
-			class='mt-2 bg-custom-menu rounded shadow-md absolute z-30 divide-y max-h-56 overflow-y-auto'
+			class='mt-2 bg-custom-menu rounded shadow-xl absolute z-30 divide-y max-h-56 overflow-y-auto'
 			transition:fade={{duration: 150}}
 		>
 			<li>
