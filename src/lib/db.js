@@ -73,6 +73,32 @@ export const Auth = {
 	},
 };
 
+export const Email_List = {
+	table: 'email_list',
+	async delete () {
+
+	},
+	async get (id) {
+		const { body, error } = await supabase
+			.from(this.table)
+			.select('*')
+			.eq('id', id)
+			.single()
+		console.log(error)
+		return body
+	},
+	async set (email) {
+		const { body, error } = await supabase
+			.from(this.table)
+			.insert(email)
+		console.log(error)
+		return body
+	},
+	async update () {
+
+	},
+};
+
 export const Notifications = {
 	table: 'notifications',
 	async delete () {

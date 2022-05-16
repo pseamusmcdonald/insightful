@@ -45,8 +45,8 @@
 			/>
 		</div>
 	</div>
-	<div class="flex flex-col gap-3">
-		<button type="submit" class="py-3 bg-zinc-100 hover:bg-zinc-200 text-black rounded font-semibold">Sign Up</button>
+	<div class="flex flex-col gap-3 items-center">
+		<button type="submit" class="w-fit px-12 py-3 bg-zinc-100 hover:bg-zinc-200 text-black rounded font-semibold">Sign Up</button>
 		<div class="text-center">Have an account? <a href="./login" class="font-bold">Login!</a></div>
 	</div>
 </form>

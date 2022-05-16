@@ -14,9 +14,9 @@
 	--dark-menu: rgb(39 39 42);
 	--light-menu: rgb(250 250 250);
 	--dark-selected: rgb(82 82 91);
-	--light-selected: rgb(161 161 170);
+	--light-selected: rgb(205 205 208);
 	--dark-hover: rgb(63 63 70);
-	--light-hover: rgb(212 212 216);
+	--light-hover: rgb(225 225 229);
 }
 
 html {

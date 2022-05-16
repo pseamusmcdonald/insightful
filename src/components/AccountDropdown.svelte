@@ -22,7 +22,7 @@
 <ul class='w-fit relative' use:clickOutside on:outclick={() => {isOpen = false}}>
 	<button
 	on:click|stopPropagation={() => {isOpen = !isOpen}}
-	class='flex items-center gap-2'	
+	class='flex items-center gap-2 border border-zinc-500 rounded px-2 py-1 text-sm'	
 	>
 		<span>{selected_account ? selected_account.name : 'All Accounts'}</span>
 		<span>
@@ -35,13 +35,13 @@
 	</button>
 	{#if isOpen}
 		<div 
-			class='mt-2 bg-custom-menu rounded shadow-xl absolute z-30 divide-y max-h-56 overflow-y-auto'
+			class='mt-2 bg-custom-menu border border-zinc-500 rounded shadow-lg absolute z-30 divide-y max-h-56 overflow-y-auto'
 			transition:fade={{duration: 150}}
 		>
 			<li>
 				<button
 					on:click={() => handleSelection(null)}
-					class='text-left w-full text-sm min-w-max px-4 py-3 hover:bg-custom-hover'
+					class='text-left w-full text-sm min-w-max p-2 hover:bg-custom-hover'
 					class:selected={selected_account == null}
 				>All Acounts</button>
 			</li>
@@ -49,7 +49,7 @@
 				<li>
 					<button
 						on:click={handleSelection(account)}
-						class='w-full text-left text-sm min-w-max px-4 py-3 hover:bg-custom-hover'
+						class='w-full text-left text-sm min-w-max p-2 hover:bg-custom-hover'
 						class:selected={selected_account == account}
 					>{account.name} ******{account.mask}</button>
 				</li>

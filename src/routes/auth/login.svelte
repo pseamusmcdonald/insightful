@@ -21,7 +21,7 @@
 >
 	<div class="flex flex-col gap-3">
 		<div class="flex flex-col gap-1">
-			<label>Email</label>
+			<label for='email'>Email</label>
 			<input
 				type="email"
 				bind:value={email}
@@ -29,7 +29,7 @@
 			/>
 		</div>
 		<div class="flex flex-col gap-1">
-			<label>Password</label>
+			<label for='password'>Password</label>
 			<input
 				type="password"
 				bind:value={password}
@@ -37,8 +37,8 @@
 			/>
 		</div>
 	</div>
-	<div class="flex flex-col gap-3">
-		<button type="submit" class="py-3 bg-zinc-100 hover:bg-zinc-200 text-black rounded font-semibold">Login</button>
+	<div class="flex flex-col gap-3 items-center">
+		<button type="submit" class="w-fit px-12 py-3 bg-zinc-100 hover:bg-zinc-200 text-black rounded font-semibold">Login</button>
 		<div class="text-center">Need an account? <a href="./sign-up" class="font-bold">Sign Up!</a></div>
 	</div>
 </form>

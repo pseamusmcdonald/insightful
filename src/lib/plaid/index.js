@@ -1,8 +1,8 @@
 import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid'
 
-const PLAID_CLIENT_ID = import.meta.env.VITE_PLAID_CLIENT_ID
-const PLAID_SECRET = import.meta.env.VITE_PLAID_SECRET
-const PLAID_ENV = import.meta.env.VITE_PLAID_ENV
+const PLAID_CLIENT_ID = process.env['PLAID_CLIENT_ID']
+const PLAID_SECRET = process.env['PLAID_SECRET']
+const PLAID_ENV = process.env['PLAID_ENV']
 
 // Create config object and initialize client
 
