@@ -1,4 +1,7 @@
+import dotenv from 'dotenv'
 import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid'
+
+dotenv.config()
 
 const PLAID_CLIENT_ID = process.env['PLAID_CLIENT_ID']
 const PLAID_SECRET = process.env['PLAID_SECRET']
