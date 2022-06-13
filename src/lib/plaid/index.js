@@ -4,7 +4,7 @@ import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid'
 dotenv.config()
 
 const PLAID_CLIENT_ID = process.env['PLAID_CLIENT_ID']
-const PLAID_SECRET = process.env['PLAID_SECRET']
+export const PLAID_SECRET = process.env['PLAID_SECRET']
 const PLAID_ENV = process.env['PLAID_ENV']
 
 // Create config object and initialize client
